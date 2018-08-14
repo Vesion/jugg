@@ -2,7 +2,7 @@
 #
 # -*- coding: utf-8 -*-
 
-from __future__ import print_function, division
+from __future__ import division
 import numpy as np
 
 # https://en.wikipedia.org/wiki/Loss_functions_for_classification
