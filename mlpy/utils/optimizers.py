@@ -5,6 +5,8 @@
 from __future__ import division
 import numpy as np
 
+# http://ruder.io/optimizing-gradient-descent/
+
 class _Optimizer_():
     @property
     def name(self):
@@ -37,7 +39,7 @@ class NesterovAcceleratedGradient(_Optimizer_):
             self.v = np.zeros(weights.shape)
 
         self.v = self.momentum * self.v + \
-                 self.learning_rate * (gradient - self.momentum * self.v)
+                 self.learning_rate * (gradients - self.momentum * self.v)
         return weights - self.v
 
 NAGD = NesterovAcceleratedGradient

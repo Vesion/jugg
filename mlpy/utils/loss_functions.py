@@ -7,6 +7,7 @@ import numpy as np
 
 # https://en.wikipedia.org/wiki/Loss_functions_for_classification
 
+
 class _Loss_Function_():
     @property
     def name(self):
@@ -19,6 +20,8 @@ class IndicatorLoss(_Loss_Function_): # 0-1 loss
 
     def gradient(self, y_pred, y_label):
         raise NotImplementedError()
+
+ZeroOneLoss = IndicatorLoss
 
 
 class HingeLoss(_Loss_Function_):

@@ -10,20 +10,27 @@ from mlpy.utils.activation_functions import Sigmoid
 from mlpy.utils.loss_functions import SquareLoss
 from mlpy.utils.optimizers import SGD
 
+
 class Perceptron():
-    def __init__(self, iterations=1000, activation_function=Sigmoid, loss_function=SquareLoss, optimizer=SGD()):
+    def __init__(self, iterations=1000, activation_function=Sigmoid, loss_function=SquareLoss, optimizer=SGD):
         self.n_iterations = iterations
         self.activation_function = activation_function()
         self.loss_function = loss_function()
-        self.optimizer_w = copy.copy(optimizer)
-        self.optimizer_b = copy.copy(optimizer)
+        self.optimizer_w = optimizer()
+        self.optimizer_b = optimizer()
 
     def fit(self, features, label):
-        # features: [k, m], label: [k, n]
-        n_samples, n_features = features.shape
+        # k: batch size
+        # m: number of features in a sample
+        # n: number of labels in a sample
+
+        # features: [k, m]
+        # label: [k, n]
+        _, n_features = features.shape
         _, n_outputs = label.shape
 
-        # weights: [m, n], bias: [1, n]
+        # weights: [m, n]
+        # bias: [1, n]
         limit = 1 / np.sqrt(n_features)
         self.weights = np.random.uniform(-limit, limit, (n_features, n_outputs))
         self.bias = np.zeros((1, n_outputs))

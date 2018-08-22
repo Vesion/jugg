@@ -26,11 +26,18 @@ x = np.array([
 ], dtype=float)
 
 y = np.array([
-    [1],
-    [-1],
+    4,
+    1,
 ], dtype=float)
 
-from mlpy.supervised.perceptron import Perceptron
-p = Perceptron(iterations = 100)
-p.fit(x, y)
-print p.predict(np.array([-1,0]))
+# from mlpy.utils.optimizers import NAGD
+# from mlpy.supervised.perceptron import Perceptron
+
+# p = Perceptron(iterations=100, optimizer=NAGD)
+# p.fit(x, y)
+# print p.predict(np.array([-1,0]))
+
+from mlpy.supervised.k_nearest_neighbors import KNN
+knn = KNN(k=5)
+knn.fit(x, y)
+print knn.predict(np.array([[2,0]]))

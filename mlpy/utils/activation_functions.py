@@ -7,6 +7,7 @@ import numpy as np
 
 # https://en.wikipedia.org/wiki/Activation_function
 
+
 class _Activation_Function_():
     @property
     def name(self):

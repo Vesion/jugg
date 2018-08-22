@@ -7,6 +7,7 @@ import numpy as np
 
 # https://en.wikipedia.org/wiki/Confusion_matrix
 
+
 def accuracy_score(y_pred, y_label):
     # (TP+TN) / (TP+TN+FP+FN)
     accuracy = np.sum(y_pred == y_label, axis=0) / len(y_pred)
