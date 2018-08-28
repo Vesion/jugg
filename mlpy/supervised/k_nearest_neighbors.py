@@ -13,8 +13,8 @@ class KNearestNeighbors():
         self.k = k
 
     def fit(self, features, label):
-        # features: k * m
-        # label: 1 * k
+        # features: (k, m)
+        # label: (k, 1).T
         self.features = features
         self.label = label
 

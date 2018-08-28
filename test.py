@@ -20,6 +20,26 @@ import numpy as np
 # print l(p, y)
 
 
+from mlpy.utils.optimizers import NAGD
+from mlpy.supervised.perceptron import Perceptron
+
+x = np.array([
+    [1,0],
+    [-1,0],
+], dtype=float)
+
+y = np.array([
+    [4, 1],
+    [1, 3],
+], dtype=float)
+
+p = Perceptron(iterations=100, optimizer=NAGD)
+p.fit(x, y)
+print p.predict(np.array([-1,0]))
+
+
+from mlpy.supervised.k_nearest_neighbors import KNN
+
 x = np.array([
     [1,0],
     [-1,0],
@@ -30,14 +50,7 @@ y = np.array([
     1,
 ], dtype=float)
 
-# from mlpy.utils.optimizers import NAGD
-# from mlpy.supervised.perceptron import Perceptron
-
-# p = Perceptron(iterations=100, optimizer=NAGD)
-# p.fit(x, y)
-# print p.predict(np.array([-1,0]))
-
-from mlpy.supervised.k_nearest_neighbors import KNN
 knn = KNN(k=5)
 knn.fit(x, y)
+
 print knn.predict(np.array([[2,0]]))
