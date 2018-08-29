@@ -1,4 +1,7 @@
 import numpy as np
+
+# ## utils
+#
 # from mlpy.utils.activation_functions import *
 # from mlpy.utils.loss_functions import *
 # from mlpy.utils.metrics import *
@@ -20,37 +23,63 @@ import numpy as np
 # print l(p, y)
 
 
-from mlpy.utils.optimizers import NAGD
-from mlpy.supervised.perceptron import Perceptron
+# ## peceptron
+# from mlpy.utils.optimizers import NAGD
+# from mlpy.supervised.perceptron import Perceptron
+
+# x = np.array([
+    # [1,0],
+    # [-1,0],
+# ], dtype=float)
+
+# y = np.array([
+    # [4, 1],
+    # [1, 3],
+# ], dtype=float)
+
+# p = Perceptron(optimizer=NAGD)
+# p.fit(x, y, iterations=10)
+# print p.predict(np.array([[-1,0], [0,-1]]))
+
+
+# ## knn
+# from mlpy.supervised.k_nearest_neighbors import KNN
+
+# x = np.array([
+    # [1,0],
+    # [-1,0],
+# ], dtype=float)
+
+# y = np.array([
+    # [4],
+    # [1],
+# ], dtype=float)
+
+# knn = KNN(k=5)
+# knn.fit(x, y)
+
+# print knn.predict(np.array([[2,0]]))
+
+
+# LR
+from mlpy.supervised.logistic_regression import LR
 
 x = np.array([
-    [1,0],
-    [-1,0],
+    [1,1],
+    [1,2],
+    [-1,-1],
+    [-2,-1],
 ], dtype=float)
 
 y = np.array([
-    [4, 1],
-    [1, 3],
+    [1],
+    [1],
+    [0],
+    [0],
 ], dtype=float)
 
-p = Perceptron(iterations=100, optimizer=NAGD)
-p.fit(x, y)
-print p.predict(np.array([-1,0]))
+lr = LR()
+lr.fit(x, y, iterations=10)
 
+print lr.predict(np.array([[0,0], [0,1]]))
 
-from mlpy.supervised.k_nearest_neighbors import KNN
-
-x = np.array([
-    [1,0],
-    [-1,0],
-], dtype=float)
-
-y = np.array([
-    4,
-    1,
-], dtype=float)
-
-knn = KNN(k=5)
-knn.fit(x, y)
-
-print knn.predict(np.array([[2,0]]))

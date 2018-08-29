@@ -14,7 +14,7 @@ class KNearestNeighbors():
 
     def fit(self, features, label):
         # features: (k, m)
-        # label: (k, 1).T
+        # label: (k, 1)
         self.features = features
         self.label = label
 
@@ -26,7 +26,7 @@ class KNearestNeighbors():
         for i, sample in enumerate(features):
             # use the naive sort method to find the k nearest neighbors
             knn_idx = np.argsort([cal_euclidean_distance(sample, x) for x in self.features])[:self.k]
-            knn = np.array([self.label[j] for j in knn_idx])
+            knn = np.array([self.label[j][0] for j in knn_idx])
             pred[i] = self._vote(knn)
         return pred
 
