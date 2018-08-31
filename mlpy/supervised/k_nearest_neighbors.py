@@ -9,6 +9,9 @@ from mlpy.utils.math_utils import cal_euclidean_distance
 
 
 class KNearestNeighbors():
+    '''
+    Use brute-force way to find k nearest neighbor nodes.
+    '''
     def __init__(self, k=4):
         self.k = k
 

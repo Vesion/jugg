@@ -10,6 +10,9 @@ from mlpy.utils.optimizers import SGD
 
 
 class LogisticRegression():
+    '''
+    The feature is in linear relationship with log odds (logit) of prediction.
+    '''
     def __init__(self, optimizer=SGD):
         self.activation_function = Sigmoid()
         self.loss_function = LogLoss()

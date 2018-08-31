@@ -61,8 +61,31 @@ import numpy as np
 # print knn.predict(np.array([[2,0]]))
 
 
-# LR
-from mlpy.supervised.logistic_regression import LR
+# # LR
+# from mlpy.supervised.logistic_regression import LR
+
+# x = np.array([
+    # [1,1],
+    # [1,2],
+    # [-1,-1],
+    # [-2,-1],
+# ], dtype=float)
+
+# y = np.array([
+    # [1],
+    # [1],
+    # [0],
+    # [0],
+# ], dtype=float)
+
+# lr = LR()
+# lr.fit(x, y, iterations=1000)
+
+# print lr.predict(np.array([[0,0], [0,1]]))
+
+
+# Naive Bayes
+from mlpy.supervised.naive_bayes import NaiveBayes
 
 x = np.array([
     [1,1],
@@ -74,12 +97,11 @@ x = np.array([
 y = np.array([
     [1],
     [1],
-    [0],
-    [0],
+    [2],
+    [2],
 ], dtype=float)
 
-lr = LR()
-lr.fit(x, y, iterations=10)
+nb = NaiveBayes()
+nb.fit(x, y)
 
-print lr.predict(np.array([[0,0], [0,1]]))
-
+print nb.predict(np.array([[1,1], [-2,-1]])) # wrong

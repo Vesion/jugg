@@ -35,3 +35,11 @@ def cal_label_entropy(Y):
         p = count / len(Y)
         entropy += -p * np.log2(p)
     return entropy
+
+
+def cal_gaussian_distribution(x, mean, variance):
+    eps = 1e-4 # to prevent division by zero
+    coeff = 1.0 / math.sqrt(2.0 * math.pi * variance + eps)
+    exponent = math.exp(-math.pow(x-mean, 2) / (2*variance + eps))
+    return coeff * exponent
+

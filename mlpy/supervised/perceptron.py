@@ -12,6 +12,9 @@ from mlpy.utils.optimizers import SGD
 
 
 class Perceptron():
+    '''
+    Apply non-linear activation function to linear output.
+    '''
     def __init__(self, activation_function=Tanh, loss_function=SquareLoss, optimizer=SGD):
         self.activation_function = activation_function()
         self.loss_function = loss_function()
