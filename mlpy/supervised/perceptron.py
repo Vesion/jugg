@@ -4,7 +4,6 @@
 
 from __future__ import division
 import numpy as np
-import copy
 
 from mlpy.utils.activation_functions import Tanh
 from mlpy.utils.loss_functions import SquareLoss
@@ -12,45 +11,37 @@ from mlpy.utils.optimizers import SGD
 
 
 class Perceptron():
-    '''
-    Apply non-linear activation function to linear output.
-    '''
+    """
+    The one layer neural network classifier.
+    """
     def __init__(self, activation_function=Tanh, loss_function=SquareLoss, optimizer=SGD):
-        self.activation_function = activation_function()
+        self.activation_func = activation_function()
         self.loss_function = loss_function()
-        self.optimizer_w = optimizer()
-        self.optimizer_b = optimizer()
+        self.optimizer = optimizer()
 
-    def fit(self, features, label, iterations=100):
-        # k: batch size
-        # m: number of features in a sample
-        # n: number of labels in a sample
+    def fit(self, X, y, iterations=100):
+        # X: (k, m)
+        # y: (k, n)
+        m = X.shape[1]
+        n = y.shape[1]
 
-        # features: (k, m)
-        # label: (k, n)
-        k = features.shape[1]
-        n = label.shape[1]
-
-        # weights: (m, n)
-        # bias: (1, n)
-        limit = 1 / np.sqrt(k)
-        self.weights = np.random.uniform(-limit, limit, (k, n))
-        self.bias = np.zeros((1, n))
+        # Initialize weights between [-1/sqrt(N), 1/sqrt(N)]
+        limit = 1 / np.sqrt(m)
+        self.weights = np.random.uniform(-limit, limit, (m, n)) # (m, n)
+        self.bias = np.zeros((1, n)) # (1, n)
 
         for i in range(iterations):
-            linear_output = features.dot(self.weights) + self.bias # (k, n)
-            pred = self.activation_function(linear_output) # (k, n)
+            linear_output = X.dot(self.weights) + self.bias # (k, n)
+            pred = self.activation_func(linear_output) # (k, n)
 
-            gradient = self.loss_function.gradient(pred, label) \
-                     * self.activation_function.gradient(linear_output) # (k, n)
-            gradient_w = features.T.dot(gradient) # (m, n)
+            gradient = self.loss_function.gradient(y, pred) * self.activation_func.gradient(linear_output) # (k, n)
+            gradient_w = X.T.dot(gradient) # (m, n)
             gradient_b = np.sum(gradient, axis=0, keepdims=True) # (1, n)
 
-            self.weights = self.optimizer_w.update(self.weights, gradient_w)
-            self.bias = self.optimizer_b.update(self.bias, gradient_b)
+            self.weights = self.optimizer.update(self.weights, gradient_w) # (m, n)
+            self.bias = self.optimizer.update(self.bias, gradient_b) # (1, n)
 
-    def predict(self, features):
-        linear_output = features.dot(self.weights) + self.bias
-        pred = self.activation_function(linear_output)
+    def predict(self, X):
+        pred = self.activation_func(X.dot(self.weights) + self.bias)
         return pred
 

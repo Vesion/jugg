@@ -15,22 +15,22 @@ class NaiveBayes():
     P(Yi|X) - Posterior, the probability that the sample X is class Yi,
               given the feature X being distributed according to prior distribution Y
     P(X|Yi) - Likelihood of feature X given class Yi
-              Gaussian distribution
+              use Gaussian Distribution here
     P(Yi)   - Prior, distribution of classes Y
-    P(X)    - Scales the posterior to make it a proper probability distribution.
-              This term is ignored in this implementation since it doesn't affect
+    P(X)    - Scales the posterior to make it a proper probability distribution,
+              this term is ignored in this implementation since it doesn't affect
               which class distribution the sample is most likely to belong to.
     '''
-    def fit(self, X, Y):
+    def fit(self, X, y):
         # X: (k, m)
-        # Y: (k, 1)
+        # y: (k, 1)
         self.X = X
-        self.Y = Y.T
-        self.classes = np.unique(Y)
+        self.y = np.ravel(y) # convert to (k,)
+        self.classes = np.unique(y)
         self.params = []
 
         for i, c in enumerate(self.classes):
-            X_c = X[np.where(Y == c)]
+            X_c = X[np.where(y == c)]
             self.params.append([])
             for feature in X_c.T:
                 self.params[i].append({'mean': feature.mean(), 'var': feature.var()})
@@ -41,7 +41,7 @@ class NaiveBayes():
         return cal_gaussian_distribution(x, mean, var)
 
     def _cal_prior(self, c):
-        frequency = np.mean(self.Y == c)
+        frequency = np.mean(self.y == c)
         return frequency
 
     def _classify(self, x):

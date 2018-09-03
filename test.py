@@ -23,65 +23,71 @@ import numpy as np
 # print l(p, y)
 
 
-# ## peceptron
-# from mlpy.utils.optimizers import NAGD
-# from mlpy.supervised.perceptron import Perceptron
+# peceptron
+from mlpy.supervised.perceptron import Perceptron
 
-# x = np.array([
-    # [1,0],
-    # [-1,0],
-# ], dtype=float)
+x = np.array([
+    [1,0],
+    [-1,0],
+], dtype=float)
 
-# y = np.array([
-    # [4, 1],
-    # [1, 3],
-# ], dtype=float)
+y = np.array([
+    [1],
+    [-1],
+], dtype=float)
 
-# p = Perceptron(optimizer=NAGD)
-# p.fit(x, y, iterations=10)
-# print p.predict(np.array([[-1,0], [0,-1]]))
+p = Perceptron()
+p.fit(x, y)
 
-
-# ## knn
-# from mlpy.supervised.k_nearest_neighbors import KNN
-
-# x = np.array([
-    # [1,0],
-    # [-1,0],
-# ], dtype=float)
-
-# y = np.array([
-    # [4],
-    # [1],
-# ], dtype=float)
-
-# knn = KNN(k=5)
-# knn.fit(x, y)
-
-# print knn.predict(np.array([[2,0]]))
+print "perceptron"
+print p.predict(np.array([[1,0], [-1,0]]))
+print ""
 
 
-# # LR
-# from mlpy.supervised.logistic_regression import LR
+# knn
+from mlpy.supervised.k_nearest_neighbors import KNN
 
-# x = np.array([
-    # [1,1],
-    # [1,2],
-    # [-1,-1],
-    # [-2,-1],
-# ], dtype=float)
+x = np.array([
+    [1,0],
+    [-1,0],
+], dtype=float)
 
-# y = np.array([
-    # [1],
-    # [1],
-    # [0],
-    # [0],
-# ], dtype=float)
+y = np.array([
+    [4],
+    [1],
+], dtype=float)
 
-# lr = LR()
-# lr.fit(x, y, iterations=1000)
+knn = KNN(k=5)
+knn.fit(x, y)
 
-# print lr.predict(np.array([[0,0], [0,1]]))
+print "knn"
+print knn.predict(np.array([[2,0], [1,0]]))
+print ""
+
+
+# LR
+from mlpy.supervised.logistic_regression import LR
+
+x = np.array([
+    [1,1],
+    [1,2],
+    [-1,-1],
+    [-2,-1],
+], dtype=float)
+
+y = np.array([
+    [1],
+    [1],
+    [0],
+    [0],
+], dtype=float)
+
+lr = LR()
+lr.fit(x, y, iterations=100)
+
+print "LR"
+print lr.predict(np.array([[1,1], [0,0]]))
+print ""
 
 
 # Naive Bayes
@@ -104,4 +110,32 @@ y = np.array([
 nb = NaiveBayes()
 nb.fit(x, y)
 
-print nb.predict(np.array([[1,1], [-2,-1]])) # wrong
+print "naive bayes"
+print nb.predict(np.array([[1,1], [1,2]]))
+print ""
+
+
+# SVM
+from mlpy.supervised.support_vector_machine import SVM
+
+x = np.array([
+    [1,1],
+    [1,2],
+    [-1,-1],
+    [-2,-1],
+], dtype=float)
+
+y = np.array([
+    [1],
+    [1],
+    [-1],
+    [-1],
+], dtype=float)
+
+svm = SVM()
+svm.fit(x, y)
+
+print "svm"
+print svm.predict(np.array([[1,1], [-1,-1]]))
+print ""
+

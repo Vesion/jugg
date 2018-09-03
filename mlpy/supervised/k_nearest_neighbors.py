@@ -15,21 +15,21 @@ class KNearestNeighbors():
     def __init__(self, k=4):
         self.k = k
 
-    def fit(self, features, label):
-        # features: (k, m)
-        # label: (k, 1)
-        self.features = features
-        self.label = label
+    def fit(self, X, y):
+        # X: (k, m)
+        # y: (k, 1)
+        self.X = X
+        self.y = np.ravel(y) # convert to (k,)
 
     def _vote(self, neighbor_label):
         return np.bincount(neighbor_label.astype(int)).argmax()
 
-    def predict(self, features):
-        pred = np.zeros(features.shape[0])
-        for i, sample in enumerate(features):
+    def predict(self, X):
+        pred = np.zeros(X.shape[0])
+        for i, sample in enumerate(X):
             # use the naive sort method to find the k nearest neighbors
-            knn_idx = np.argsort([cal_euclidean_distance(sample, x) for x in self.features])[:self.k]
-            knn = np.array([self.label[j][0] for j in knn_idx])
+            knn_idx = np.argsort([cal_euclidean_distance(sample, x) for x in self.X])[:self.k]
+            knn = np.array([self.y[j] for j in knn_idx])
             pred[i] = self._vote(knn)
         return pred
 
