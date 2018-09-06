@@ -49,6 +49,9 @@ class SupportVectorMachine():
                 kernel_matrix[i, j] = self.kernel(X[i], X[j])
 
         # Define the quadratic optimization problem
+        # minimize 1/2 * x.T * P * x + q.T * x
+        #     s.t. G * x <= h
+        #          A * x == b
         P = cvxopt.matrix(np.outer(y, y) * kernel_matrix, tc='d')
         q = cvxopt.matrix(np.ones(k) * -1)
         A = cvxopt.matrix(y, (1, k), tc='d')
@@ -69,11 +72,11 @@ class SupportVectorMachine():
         minimization = cvxopt.solvers.qp(P, q, G, h, A, b)
 
         # Lagrange multipliers
-        lagr_mult = np.ravel(minimization['x'])
+        alpha = np.ravel(minimization['x'])
 
         # Extract support vectors
-        idx = lagr_mult > 1e-7
-        self.alpha = lagr_mult[idx]
+        idx = alpha > 1e-7
+        self.alpha = alpha[idx]
         self.support_vectors = X[idx]
         self.support_vector_labels = y[idx]
 

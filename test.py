@@ -27,11 +27,13 @@ import numpy as np
 from mlpy.supervised.perceptron import Perceptron
 
 x = np.array([
-    [1,0],
-    [-1,0],
+    [3,3],
+    [4,3],
+    [1,1],
 ], dtype=float)
 
 y = np.array([
+    [1],
     [1],
     [-1],
 ], dtype=float)
@@ -40,7 +42,7 @@ p = Perceptron()
 p.fit(x, y)
 
 print "perceptron"
-print p.predict(np.array([[1,0], [-1,0]]))
+print p.predict(np.array([[4,0], [0,0]]))
 print ""
 
 

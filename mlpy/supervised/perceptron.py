@@ -5,43 +5,40 @@
 from __future__ import division
 import numpy as np
 
-from mlpy.utils.activation_functions import Tanh
-from mlpy.utils.loss_functions import SquareLoss
-from mlpy.utils.optimizers import SGD
-
 
 class Perceptron():
     """
-    The one layer neural network classifier.
+    A linear classifier combining a set of weights with the feature vector.
+    i.e. f(x) = sign(w*x + b)
     """
-    def __init__(self, activation_function=Tanh, loss_function=SquareLoss, optimizer=SGD):
-        self.activation_func = activation_function()
-        self.loss_function = loss_function()
-        self.optimizer = optimizer()
+    def __init__(self, learning_rate=0.5):
+        self.learning_rate = learning_rate
 
-    def fit(self, X, y, iterations=100):
+    def _find_false_index(self):
+        for i in range(len(self.X)):
+            if self.y[i] * (self.X[i].dot(self.weights) + self.bias) <= 0:
+                return i
+        return None
+
+    def fit(self, X, y):
         # X: (k, m)
-        # y: (k, n)
+        # y: (k, 1)
+        self.X = X
+        self.y = np.ravel(y) # convert to (k,)
         m = X.shape[1]
-        n = y.shape[1]
 
         # Initialize weights between [-1/sqrt(N), 1/sqrt(N)]
         limit = 1 / np.sqrt(m)
-        self.weights = np.random.uniform(-limit, limit, (m, n)) # (m, n)
-        self.bias = np.zeros((1, n)) # (1, n)
+        self.weights = np.random.uniform(-limit, limit, (m, 1)) # (m, 1)
+        self.bias = 0
 
-        for i in range(iterations):
-            linear_output = X.dot(self.weights) + self.bias # (k, n)
-            pred = self.activation_func(linear_output) # (k, n)
-
-            gradient = self.loss_function.gradient(y, pred) * self.activation_func.gradient(linear_output) # (k, n)
-            gradient_w = X.T.dot(gradient) # (m, n)
-            gradient_b = np.sum(gradient, axis=0, keepdims=True) # (1, n)
-
-            self.weights = self.optimizer.update(self.weights, gradient_w) # (m, n)
-            self.bias = self.optimizer.update(self.bias, gradient_b) # (1, n)
+        false_index = self._find_false_index()
+        while false_index != None:
+            self.weights += self.learning_rate * self.y[false_index] * self.X[false_index].reshape(m, 1)
+            self.bias += self.learning_rate * self.y[false_index]
+            false_index = self._find_false_index()
 
     def predict(self, X):
-        pred = self.activation_func(X.dot(self.weights) + self.bias)
+        pred = np.sign(X.dot(self.weights) + self.bias)
         return pred
 
