@@ -11,6 +11,7 @@ from mlpy.utils.optimizers import SGD
 
 class LogisticRegression():
     '''
+    Binary classifier, y = {0, 1}
     Log odds (logit) of prediction is the linear function to feature
     '''
     def __init__(self, optimizer=SGD):

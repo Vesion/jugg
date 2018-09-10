@@ -8,8 +8,9 @@ import numpy as np
 
 class Perceptron():
     """
+    Binary classifier, y = {-1, +1}
     A linear classifier combining a set of weights with the feature vector.
-    i.e. f(x) = sign(w*x + b)
+        f(x) = sign(w*x + b)
     """
     def __init__(self, learning_rate=0.5):
         self.learning_rate = learning_rate
@@ -40,5 +41,5 @@ class Perceptron():
 
     def predict(self, X):
         pred = np.sign(X.dot(self.weights) + self.bias)
-        return pred
+        return np.ravel(pred)
 

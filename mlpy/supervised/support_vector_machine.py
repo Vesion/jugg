@@ -12,6 +12,7 @@ cvxopt.solvers.options['show_progress'] = False
 
 class SupportVectorMachine():
     '''
+    Binary classifier, y = {-1, +1}
     SVM with kernel method.
     Uses cvxopt to solve the convex quadratic programming.
     '''
@@ -83,8 +84,8 @@ class SupportVectorMachine():
         # Calculate bias with first support vector
         self.bias = self.support_vector_labels[0]
         for i in range(len(self.alpha)):
-            self.bias -= self.alpha[i] * self.support_vector_labels[
-                i] * self.kernel(self.support_vectors[i], self.support_vectors[0])
+            self.bias -= self.alpha[i] * self.support_vector_labels[ i] \
+                       * self.kernel(self.support_vectors[i], self.support_vectors[0])
 
     def predict(self, X):
         preds = []

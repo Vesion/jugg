@@ -9,6 +9,7 @@ from mlpy.utils.math_utils import cal_gaussian_distribution
 
 class NaiveBayes():
     '''
+    Multi-class classifier
     Bayes rule: P(Yi|X) = P(X|Yi)P(Yi) / P(X)
              or Posterior = Likelihood * Prior / Scaling Factor
     Classifies the sample as the class that results in the largest P(Y|X) (posterior)
@@ -37,7 +38,7 @@ class NaiveBayes():
         
 
     def _cal_likelihood(self, x, mean, var):
-        # use Gaussian Distribution (or Normal Distribution)
+        # use Gaussian Distribution (Normal Distribution)
         return cal_gaussian_distribution(x, mean, var)
 
     def _cal_prior(self, c):

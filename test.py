@@ -52,18 +52,22 @@ from mlpy.supervised.k_nearest_neighbors import KNN
 x = np.array([
     [1,0],
     [-1,0],
+    [1,3],
+    [2,0],
 ], dtype=float)
 
 y = np.array([
-    [4],
     [1],
+    [2],
+    [3],
+    [4],
 ], dtype=float)
 
 knn = KNN(k=5)
 knn.fit(x, y)
 
 print "knn"
-print knn.predict(np.array([[2,0], [1,0]]))
+print knn.predict(np.array([[2,2], [1,-1]]))
 print ""
 
 
@@ -106,7 +110,7 @@ y = np.array([
     [1],
     [1],
     [2],
-    [2],
+    [3],
 ], dtype=float)
 
 nb = NaiveBayes()
@@ -141,3 +145,27 @@ print "svm"
 print svm.predict(np.array([[1,1], [-1,-1]]))
 print ""
 
+
+# AdaBoost
+from mlpy.supervised.adaboost import AdaBoost
+
+x = np.array([
+    [1,1],
+    [1,2],
+    [-1,-1],
+    [-2,-1],
+], dtype=float)
+
+y = np.array([
+    [1],
+    [1],
+    [-1],
+    [-1],
+], dtype=float)
+
+ab = AdaBoost()
+ab.fit(x, y)
+
+print "adaboost"
+print ab.predict(np.array([[1,1], [-1,-1]]))
+print ""
