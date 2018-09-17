@@ -5,7 +5,7 @@
 from __future__ import division
 import numpy as np
 import cvxopt
-from mlpy.utils.kernels import rbf_kernel
+from jugg.utils.kernels import rbf_kernel
 
 cvxopt.solvers.options['show_progress'] = False
 

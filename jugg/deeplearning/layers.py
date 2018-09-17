@@ -4,7 +4,7 @@
 
 from __future__ import division
 import numpy as np
-from mlpy.utils.activation_functions import *
+from jugg.utils.activation_functions import *
 
 
 class _Layer_():

@@ -5,7 +5,7 @@
 from __future__ import division
 import numpy as np
 
-from mlpy.utils.math_utils import cal_euclidean_distance
+from jugg.utils.math_utils import cal_euclidean_distance
 
 
 class KNearestNeighbors():

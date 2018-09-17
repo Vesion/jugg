@@ -2,10 +2,10 @@ import numpy as np
 
 # ## utils
 #
-# from mlpy.utils.activation_functions import *
-# from mlpy.utils.loss_functions import *
-# from mlpy.utils.metrics import *
-# from mlpy.utils.optimizers import *
+# from jugg.utils.activation_functions import *
+# from jugg.utils.loss_functions import *
+# from jugg.utils.metrics import *
+# from jugg.utils.optimizers import *
 
 # a = np.array([1,0,1,1], dtype=float)
 # b = np.array([1,0,0,1], dtype=float)
@@ -24,7 +24,7 @@ import numpy as np
 
 
 # peceptron
-from mlpy.supervised.perceptron import Perceptron
+from jugg.supervised.perceptron import Perceptron
 
 x = np.array([
     [3,3],
@@ -47,7 +47,7 @@ print ""
 
 
 # knn
-from mlpy.supervised.k_nearest_neighbors import KNN
+from jugg.supervised.k_nearest_neighbors import KNN
 
 x = np.array([
     [1,0],
@@ -72,7 +72,7 @@ print ""
 
 
 # LR
-from mlpy.supervised.logistic_regression import LR
+from jugg.supervised.logistic_regression import LR
 
 x = np.array([
     [1,1],
@@ -97,7 +97,7 @@ print ""
 
 
 # Naive Bayes
-from mlpy.supervised.naive_bayes import NaiveBayes
+from jugg.supervised.naive_bayes import NaiveBayes
 
 x = np.array([
     [1,1],
@@ -122,7 +122,7 @@ print ""
 
 
 # SVM
-from mlpy.supervised.support_vector_machine import SVM
+from jugg.supervised.support_vector_machine import SVM
 
 x = np.array([
     [1,1],
@@ -147,7 +147,7 @@ print ""
 
 
 # AdaBoost
-from mlpy.supervised.adaboost import AdaBoost
+from jugg.supervised.adaboost import AdaBoost
 
 x = np.array([
     [1,1],

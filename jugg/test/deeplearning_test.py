@@ -1,7 +1,7 @@
 import numpy as np
 
-from mlpy.deeplearning.layers import *
-from mlpy.utils.optimizers import SGD
+from jugg.deeplearning.layers import *
+from jugg.utils.optimizers import SGD
 
 dense = Dense(4, (8,))
 dense.initialize(SGD)

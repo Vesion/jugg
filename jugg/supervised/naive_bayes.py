@@ -4,7 +4,7 @@
 
 from __future__ import division
 import numpy as np
-from mlpy.utils.math_utils import cal_gaussian_distribution
+from jugg.utils.math_utils import cal_gaussian_distribution
 
 
 class NaiveBayes():

@@ -4,9 +4,9 @@
 
 from __future__ import division
 import numpy as np
-from mlpy.utils.activation_functions import Sigmoid
-from mlpy.utils.loss_functions import LogLoss
-from mlpy.utils.optimizers import SGD
+from jugg.utils.activation_functions import Sigmoid
+from jugg.utils.loss_functions import LogLoss
+from jugg.utils.optimizers import SGD
 
 
 class LogisticRegression():
